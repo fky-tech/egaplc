@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tritech — Next‑Level IT Consulting</title>
+    <style>
+        .shadow-soft {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        [data-accordion-panel] {
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            overflow: hidden;
+            max-height: 0;
+        }
+        .active [data-accordion-panel] {
+            max-height: 500px;
+        }
+        .active svg {
+            transform: rotate(180deg);
+        }
+        /* About section collapse */
+        .about-content {
+            position: relative;
+            max-height: 16rem; /* collapsed height */
+            overflow: hidden;
+            transition: max-height 300ms ease;
+        }
+        .about-content::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 56px; /* fade height */
+            background: linear-gradient(to top, #ffffff, rgba(255,255,255,0));
+        }
+        .about-content.expanded {
+            max-height: 9999px;
+        }
+        .about-content.expanded::after {
+            display: none;
+        }
+        .member-card {
+            transition: all 0.3s ease;
+        }
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .read-more-btn {
+            transition: color 0.2s ease;
+        }
+        .read-more-btn:hover {
+            color: #1e40af !important;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#E6FBF4',
+                100: '#CFF6EA',
+                200: '#9EECD6',
+                300: '#6DE1C1',
+                400: '#3CD7AD',
+                500: '#1EC79B',
+                600: '#17A07C',
+                700: '#11795D',
+                800: '#0B523E',
+                900: '#062A1F'
+              }
+            },
+            boxShadow: {
+              soft: '0 10px 30px rgba(0,0,0,0.08)'
+            },
+            fontFamily: {
+              sans: [
+                'Quicksand',
+                'ui-sans-serif',
+                'system-ui',
+                '-apple-system',
+                'Segoe UI',
+                'Roboto',
+                'Ubuntu',
+                'Cantarell',
+                'Noto Sans',
+                'Helvetica Neue',
+                'Arial',
+                'sans-serif'
+              ]
+            }
+          }
+        }
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="antialiased text-slate-800">
+    <!-- Navbar -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-100">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <a href="#" class="flex items-center gap-2">
+            <img src="logo.png" alt="EGA Logo" class="h-8 w-auto">
+            <!-- <span class="font-semibold">EGA</span> -->
+        </a>
+          <nav class="hidden md:flex items-center gap-8 text-sm">
+            <a href="#home" class="hover:text-brand-600">Home</a>
+            <a href="#about" class="hover:text-brand-600">About</a>
+            <a href="#services" class="hover:text-brand-600">Services</a>
+            <a href="#ourapproach" class="hover:text-brand-600">Our Approach</a>
+            <a href="#members" class="hover:text-brand-600">Members</a>
+            <a href="#bookconsultation" class="hover:text-brand-600">Book Consultation</a>
+          </nav>
+          <div class="flex items-center gap-3">
+            <a href="#contact" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-brand-600 px-4 py-2 text-white text-sm font-medium shadow-soft hover:bg-brand-700">Contact Us</a>
+            <button class="md:hidden inline-flex items-center justify-center rounded-md p-2 hover:bg-slate-100" id="mobileMenuBtn" aria-label="Open menu">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path fill-rule="evenodd" d="M3.75 5.25a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 0 1.5h-15a.75.75 0 0 1-.75-.75Zm0 6a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 0 1.5h-15a.75.75 0 0 1-.75-.75Zm.75 5.25a.75.75 0 0 0 0 1.5h15a.75.75 0 0 0 0-1.5h-15Z" clip-rule="evenodd"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="mobileMenu" class="md:hidden hidden border-t border-slate-100">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 grid gap-3 text-sm text-center">
+            <a href="#home" class="hover:text-brand-600" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Home</a>
+            <a href="#about" class="py-2" onclick="document.getElementById('mobileMenu').classList.add('hidden')">About</a>
+            <a href="#services" class="py-2" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Services</a>
+            <a href="#ourapproach" class="py-2" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Our Approach</a>
+            <a href="#work" class="py-2" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Work</a>
+            <a href="#members" class="py-2" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Members</a>
+            <a href="#bookconsultation" class="py-2" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Book Consultation</a>
+            <a href="#contact" class="inline-flex items-center justify-center rounded-full bg-brand-600 px-4 py-2 text-white font-medium" onclick="document.getElementById('mobileMenu').classList.add('hidden')">Contact Us</a>
+        </div>
+    </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="relative isolate">
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute inset-0" style="background-image:url('https://images.unsplash.com/photo-1549923746-c502d483b33f?q=80&w=2072&auto=format&fit=crop'); background-size:cover; background-position:center;"></div>
+    <div class="absolute inset-0 bg-slate-900/70"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(30,199,155,0.15),transparent_60%)]"></div>
+        <div class="absolute inset-0 bg-slate-900/70"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(30,199,155,0.15),transparent_60%)]"></div>
+      </div>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+        <div class="max-w-3xl">
+          <h1 class="text-white text-4xl sm:text-5xl font-extrabold leading-tight">Unlock Your Potential with Tailored Solutions</h1>
+ <p class="mt-5 text-slate-200 text-lg">At EGA Management and Financial Solutions, we specialize in simplifying operational complexities and providing the expertise to help your business reach its objectives.</p>
+          <div class="mt-8 flex items-center gap-4">
+            <a href="#services" class="inline-flex items-center gap-2 rounded-full bg-white text-slate-900 px-5 py-3 font-semibold shadow-soft hover:bg-slate-100">Find out more
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M13.5 4.5a.75.75 0 0 1 .75-.75h5.25a.75.75 0 0 1 .75.75v5.25a.75.75 0 0 1-1.5 0V6.31l-7.72 7.72a.75.75 0 1 1-1.06-1.06l7.72-7.72h-3.44a.75.75 0 0 1-.75-.75Z"/><path d="M5.25 5.25A2.25 2.25 0 0 0 3 7.5v11.25A2.25 2.25 0 0 0 5.25 21h11.25A2.25 2.25 0 0 0 18.75 18.75V12a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 1-.75.75H5.25a.75.75 0 0 1-.75-.75V7.5a.75.75 0 0 1 .75-.75h6.75a.75.75 0 0 0 0-1.5H5.25Z"/></svg>
+            </a>
+            <a href="#contact" class="inline-flex items-center gap-2 rounded-full border border-white/50 text-white px-5 py-3 font-semibold hover:bg-white/10">Get in touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid gap-10 md:grid-cols-2 md:gap-16 items-start">
+            <div>
+                <div class="flex items-center gap-2 text-sm font-medium text-brand-700">
+                <span class="h-2 w-2 rounded-full bg-brand-600"></span>
+                <span>About Us</span>
+                </div>
+                <h2 class="mt-3 text-4xl md:text-5xl font-bold leading-tight text-gray-900">At Tritech, we don't just implement technology, we enable growth.</h2>
+
+                <div class="mt-8 grid grid-cols-2 gap-6">
+                <div class="text-start">
+                    <div class="text-3xl font-bold text-brand-700"><span class="stat-count" data-target="25">0</span>+</div>
+                    <div class="text-sm text-gray-600 mt-1">Years Experience</div>
+                </div>
+                <div class="text-start">
+                    <div class="text-3xl font-bold text-brand-700"><span class="stat-count" data-target="150">0</span>+</div>
+                    <div class="text-sm text-gray-600 mt-1">Projects Completed</div>
+                </div>
+                <div class="text-start">
+                    <div class="text-3xl font-bold text-brand-700"><span class="stat-count" data-target="40">0</span>+</div>
+                    <div class="text-sm text-gray-600 mt-1">Team Members</div>
+                </div>
+                <div class="text-start">
+                    <div class="text-3xl font-bold text-brand-700"><span class="stat-count" data-target="12">0</span></div>
+                    <div class="text-sm text-gray-600 mt-1">Countries Served</div>
+                </div>
+                </div>
+            </div>
+
+            <div class="text-gray-600 leading-relaxed text-justify">
+                <div class="about-content" id="aboutContent">
+                <p>EGA Management and Financial Solutions is a multidisciplinary consulting firm with a strong background in both large, established organizations and new business ventures. The firm leverages over 25 years of professional experience in Ethiopia and abroad to provide corporate management and financial solutions to a wide range of clients, including private and public companies, government institutions, bilateral organizations, and charities. EGA also collaborates with international affiliates in the USA, Kenya, and Uganda on global assignments and projects.</p>
+                <p class="mt-5">EGA is committed to a hands-on approach, ensuring a firm manager is always in control of key project functions. The company emphasizes teamwork and clear communication among all stakeholders to ensure success on every project. Equipped with the latest technology, professional staff, and up-to-date Professional Indemnity Insurance, EGA is prepared to deliver high-quality professional services for any assignment, regardless of its size or location.</p>
+                </div>
+                <div class="mt-6 flex justify-end">
+                <button id="aboutToggle" class="flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-medium py-2 px-4 rounded-full transition-colors shadow-md">
+                    <span>Read more</span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+
+    <!-- Services / Accordion -->
+    <section id="services" class="py-16 bg-slate-50">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <!-- Header with gradient background -->
+            <div class="rounded-xl bg-gradient-to-r from-blue-600 to-teal-500 text-white p-6 sm:p-8 shadow-soft">
+                <div class="flex items-center justify-between flex-wrap gap-4">
+                    <h3 class="text-xl sm:text-2xl font-semibold">Business Consulting Services</h3>
+                    <p class="text-white/90 max-w-2xl">From strategic planning to operational excellence, we provide comprehensive solutions to maximize your business efficiency.</p>
+                </div>
+            </div>
+
+            <!-- Services Accordion -->
+            <div class="mt-8 divide-y divide-slate-200 rounded-xl bg-white shadow-soft">
+                <!-- Service 1 -->
+                <div class="service-item">
+                    <button class="w-full flex items-center justify-between px-5 py-5 text-left" data-accordion-button>
+                        <span class="text-lg font-medium">Business/Organization and Economy Plan and Study, Set Up and Structuring Services</span>
+                        <span class="text-slate-400" aria-hidden="true">
+                            <svg class="h-6 w-6 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                        </span>
+                    </button>
+                    <div class="px-5 pb-8 hidden" data-accordion-panel>
+                        <p class="text-slate-600">Comprehensive business planning, economic studies, and organizational structuring to establish a solid foundation for your enterprise.</p>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-item">
+                    <button class="w-full flex items-center justify-between px-5 py-5 text-left" data-accordion-button>
+                        <span class="text-lg font-medium">Organizational Policies, Procedures, Systems Design/Review</span>
+                        <span class="text-slate-400" aria-hidden="true">
+                            <svg class="h-6 w-6 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                        </span>
+                    </button>
+                    <div class="px-5 pb-8 hidden" data-accordion-panel>
+                        <p class="text-slate-600">Development and evaluation of organizational frameworks, policies, and procedures to enhance operational efficiency and compliance.</p>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-item">
+                    <button class="w-full flex items-center justify-between px-5 py-5 text-left" data-accordion-button>
+                        <span class="text-lg font-medium">Policy/Tax Advisory/Consultation, Finance and Management Reports Preparation/Review</span>
+                        <span class="text-slate-400" aria-hidden="true">
+                            <svg class="h-6 w-6 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                        </span>
+                    </button>
+                    <div class="px-5 pb-8 hidden" data-accordion-panel>
+                        <p class="text-slate-600">Expert advisory services on policy and taxation matters, along with comprehensive preparation and review of financial and management reports.</p>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-item">
+                    <button class="w-full flex items-center justify-between px-5 py-5 text-left" data-accordion-button>
+                        <span class="text-lg font-medium">Training and Development, Management of Trainings, Workshops and Conferences</span>
+                        <span class="text-slate-400" aria-hidden="true">
+                            <svg class="h-6 w-6 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                        </span>
+                    </button>
+                    <div class="px-5 pb-8 hidden" data-accordion-panel>
+                        <p class="text-slate-600">Comprehensive training programs and professional development initiatives, including management of workshops and conferences to enhance organizational capabilities.</p>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-item">
+                    <button class="w-full flex items-center justify-between px-5 py-5 text-left" data-accordion-button>
+                        <span class="text-lg font-medium">Project Design/Management Support, Talent Acquisition and Supply</span>
+                        <span class="text-slate-400" aria-hidden="true">
+                            <svg class="h-6 w-6 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                        </span>
+                    </button>
+                    <div class="px-5 pb-8 hidden" data-accordion-panel>
+                        <p class="text-slate-600">End-to-end project design and management assistance, coupled with strategic talent acquisition and supply chain solutions.</p>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-item">
+                    <button class="w-full flex items-center justify-between px-5 py-5 text-left" data-accordion-button>
+                        <span class="text-lg font-medium">Asset and Property Management, Insourcing Finance and Operations Services</span>
+                        <span class="text-slate-400" aria-hidden="true">
+                            <svg class="h-6 w-6 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                        </span>
+                    </button>
+                    <div class="px-5 pb-8 hidden" data-accordion-panel>
+                        <p class="text-slate-600">Professional management of assets and properties, along with comprehensive insourcing solutions for finance and operational functions.</p>
+                    </div>
+                </div>
+
+                <!-- Service 7 -->
+                <div class="service-item">
+                    <button class="w-full flex items-center justify-between px-5 py-5 text-left" data-accordion-button>
+                        <span class="text-lg font-medium">Technical Support to Merger, Acquisition and Liquidation, Operational Research and Surveys</span>
+                        <span class="text-slate-400" aria-hidden="true">
+                            <svg class="h-6 w-6 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                        </span>
+                    </button>
+                    <div class="px-5 pb-8 hidden" data-accordion-panel>
+                        <p class="text-slate-600">Expert technical support for mergers, acquisitions, and liquidations, complemented by thorough operational research and market surveys.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach -->
+    <section id="ourapproach" class="py-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-10 md:gap-14 items-start">
+            <div class="md:col-span-1">
+                <div class="flex items-center gap-2 text-sm font-medium text-brand-700">
+                <span class="h-2 w-2 rounded-full bg-brand-600"></span>
+                <span>Our Approach</span>
+                </div>
+                <h2 class="mt-3 text-4xl md:text-5xl font-bold leading-tight">Teamwork and Hands-On Management for Success</h2>
+            </div>
+            <div class="md:col-span-2 grid sm:grid-cols-2 gap-6">
+                <div class="rounded-xl border border-slate-200 p-6 bg-white shadow-soft">
+                <div class="text-brand-600 text-2xl font-bold">01</div>
+                <h3 class="mt-3 font-semibold text-lg">Teamwork as Foundation</h3>
+                <p class="mt-2 text-slate-600">We build success by combining individual strengths and refining skills to exceed client expectations.</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 p-6 bg-white shadow-soft">
+                <div class="text-brand-600 text-2xl font-bold">02</div>
+                <h3 class="mt-3 font-semibold text-lg">Hands-On Management</h3>
+                <p class="mt-2 text-slate-600">Our managers maintain direct control of key functions on all assignments and projects.</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 p-6 bg-white shadow-soft">
+                <div class="text-brand-600 text-2xl font-bold">03</div>
+                <h3 class="mt-3 font-semibold text-lg">Effective Communication</h3>
+                <p class="mt-2 text-slate-600">We ensure transparent communication with all stakeholders at every level of engagement.</p>
+                </div>
+                <div class="rounded-xl border border-slate-200 p-6 bg-white shadow-soft">
+                <div class="text-brand-600 text-2xl font-bold">04</div>
+                <h3 class="mt-3 font-semibold text-lg">Technology & Resources</h3>
+                <p class="mt-2 text-slate-600">Equipped with latest technology and skilled staff to deliver premium professional services.</p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Facilities Rental Section -->
+    <section id="training-rental" class="py-16 bg-slate-50">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-center">Training Facilities Rental</h2>
+            <p class="text-lg text-slate-600 mb-12 text-center max-w-3xl mx-auto">
+                Our state-of-the-art training facilities are available for rent. Perfect for workshops, seminars, conferences, and corporate training sessions.
+            </p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Facility 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-md transition-shadow">
+                    <div class="h-48 bg-slate-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2069&auto=format&fit=crop" 
+                            alt="Executive Conference Room" 
+                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-slate-800">Executive Conference Room</h3>
+                        <p class="mt-2 text-slate-600">Ideal for corporate training sessions and workshops with premium amenities.</p>
+                        <ul class="mt-4 space-y-2">
+                            <li class="flex items-center">
+                                <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-sm">Capacity: 30 people</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-sm">Projector & Screen</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-sm">High-speed Internet</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="mt-6 inline-flex items-center justify-center w-full bg-brand-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-brand-700 transition-colors">
+                            Inquire Now
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Facility 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-md transition-shadow">
+                    <div class="h-48 bg-slate-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?q=80&w=2069&auto=format&fit=crop" 
+                            alt="Main Training Hall" 
+                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-slate-800">Main Training Hall</h3>
+                        <p class="mt-2 text-slate-600">Spacious area designed for larger training programs and seminars.</p>
+                        <ul class="mt-4 space-y-2">
+                            <li class="flex items-center">
+                                <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-sm">Capacity: 100 people</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-sm">Audio/Visual Equipment</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-sm">Breakout Areas</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="mt-6 inline-flex items-center justify-center w-full bg-brand-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-brand-700 transition-colors">
+                            Inquire Now
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Facility 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-md transition-shadow">
+                    <div class="h-48 bg-slate-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2072&auto=format&fit=crop" 
+                            alt="Executive Boardroom" 
+                            class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-slate-800">Executive Boardroom</h3>
+                        <p class="mt-2 text-slate-600">Premium space for executive meetings and small training sessions.</p>
+                        <ul class="mt-4 space-y-2">
+                            <li class="flex items-center">
+                                <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-sm">Capacity: 15 people</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-sm">Video Conferencing</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-sm">Executive Catering</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="mt-6 inline-flex items-center justify-center w-full bg-brand-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-brand-700 transition-colors">
+                            Inquire Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <div class="mt-12 text-center">
+                <a href="#contact" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 transition-colors">
+                    View All Facilities
+                    <svg class="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Key Members -->
+    <section id="keymembers" class="py-16 bg-slate-50">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h2 id="members" class="text-4xl md:text-5xl font-bold mb-8 text-center text-gray-800">Key Members</h2>
+    <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">Our leadership team brings together decades of experience in management, finance, and organizational development to deliver exceptional results for our clients.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+      <article class="member-card bg-white rounded-xl overflow-hidden shadow-soft h-full flex flex-col">
+        <div class="w-full h-64 bg-slate-100 flex items-center justify-center overflow-hidden">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'%3E%3Cpath d='M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z'/%3E%3C/svg%3E" alt="Girum Ketema" class="h-32 w-32 object-contain">
+        </div>
+        <div class="p-6 flex-grow flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-800">Girum Ketema</h3>
+          <p class="text-sm text-blue-600 font-medium mt-1">Senior Leadership & Organizational Management</p>
+          <p class="text-sm text-slate-500 mt-2">PhD Candidate, SCHRM-CP, MBA, PGDip in International Finance, PGDip in Strategic Management, BA in Marketing Management</p>
+          <div class="mt-4 text-sm text-slate-600 flex-grow text-justify">
+            <p class="member-description">Mr. Girum is a highly qualified and experienced professional with the basic and necessary skills to provide senior leadership. He has over 25 years of national and international experience in Organizational Management and Leadership, Project Management, Financial Management, Human Resources Management and Operations.</p>
+            <div class="more-content hidden">
+              <p class="mt-2">He has worked for renowned international Nongovernmental Organizations with various capacities ranging from Technical Expert positions to Senior Management responsibilities. He is familiar with various donor rules and regulation including USAID, EU, EC, Global Fund, Bill and Gates Foundation, DIFD, SIDA, DANIDA, Private foundations, etc.</p>
+            </div>
+          </div>
+          <button class="text-blue-600 font-medium mt-4 read-more-btn self-start" data-member="1">Read more</button>
+        </div>
+      </article>
+
+      <article class="member-card bg-white rounded-xl overflow-hidden shadow-soft h-full flex flex-col">
+        <div class="w-full h-64 bg-slate-100 flex items-center justify-center overflow-hidden">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'%3E%3Cpath d='M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z'/%3E%3C/svg%3E" alt="Andinet Shiferaw" class="h-32 w-32 object-contain">
+        </div>
+        <div class="p-6 flex-grow flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-800">Andinet Shiferaw</h3>
+          <p class="text-sm text-blue-600 font-medium mt-1">Co-Founder/Manager, New Business Development</p>
+          <p class="text-sm text-slate-500 mt-2">BA Management, Diploma in Accounting</p>
+          <div class="mt-4 text-sm text-slate-600 flex-grow text-justify">
+            <p class="member-description">In his 22 years of professional career, Mr. Andinet has worked for Government and Private Enterprises with various capacities ranging from Accountant to Head of Finance. He has substantial finance and management experience mostly with service industry including management of mega construction projects within Ethiopia.</p>
+            <div class="more-content hidden">
+              <p class="mt-2">He currently serves as a Finance and Business Advisor for grade 1 contractors and manufacturing plants whereby he extends his professional service, advice and consultation since the last 5 years. Andinet is a management graduate combined with Diploma in Accounting from state universities in Ethiopia.</p>
+            </div>
+          </div>
+          <button class="text-blue-600 font-medium mt-4 read-more-btn self-start" data-member="2">Read more</button>
+        </div>
+      </article>
+
+      <article class="member-card bg-white rounded-xl overflow-hidden shadow-soft h-full flex flex-col">
+        <div class="w-full h-64 bg-slate-100 flex items-center justify-center overflow-hidden">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'%3E%3Cpath d='M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z'/%3E%3C/svg%3E" alt="Ephrem Nega" class="h-32 w-32 object-contain">
+        </div>
+        <div class="p-6 flex-grow flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-800">Ephrem Nega</h3>
+          <p class="text-sm text-blue-600 font-medium mt-1">Co-Founder/Manager, Operations and Client Services</p>
+          <p class="text-sm text-slate-500 mt-2">ACCA level 2, BA Business Management, Advanced Diploma in Computer Science, Diploma in Accounting</p>
+          <div class="mt-4 text-sm text-slate-600 flex-grow text-justify">
+            <p class="member-description">With over 22 years of Finance and Accounting experience, Mr. Ephrem has extensive Accounts management, Budgeting, and Reporting experience within the private industry including service and manufacturing. He assumed expert to head of unit responsibilities in his enduring professional experience with hands on knowledge in Ethiopian taxation, Audit and Reporting requirements.</p>
+            <div class="more-content hidden">
+              <p class="mt-2">Ephrem worked for the state-owned Emergency Relief Transport Enterprise at his early professional career and later joined CPU Business and Information Technology College with Senior Accountant role. He has been promoted to the Head of Finance role since 2007 leading the finance and accounts team of the college.</p>
+            </div>
+          </div>
+          <button class="text-blue-600 font-medium mt-4 read-more-btn self-start" data-member="3">Read more</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <!-- Testimonials -->
+    <!-- <section id="testimonials" class="py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="inline-flex items-center gap-2 text-sm font-medium text-brand-700">
+            <span class="h-2 w-2 rounded-full bg-brand-600"></span>
+            <span>Testimonial</span>
+          </div>
+          <h2 class="mt-3 text-3xl font-bold">Hear What Our Client Say</h2>
+        </div>
+
+        <div class="mt-10 relative max-w-3xl mx-auto">
+          <button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-soft border border-slate-200 hover:bg-slate-50" data-testimonial-prev>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-soft border border-slate-200 hover:bg-slate-50" data-testimonial-next>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+
+          <div class="overflow-hidden">
+            <div class="flex transition-transform duration-500 ease-out" data-testimonial-track>
+              <div class="basis-full shrink-0 px-4">
+                <div class="rounded-xl bg-sky-50 border border-slate-200 p-6 sm:p-8 shadow-soft">
+                  <div class="flex items-center gap-3">
+                    <img src="https://i.pravatar.cc/64?img=15" alt="Renata" class="h-10 w-10 rounded-full" />
+                    <div>
+                      <div class="font-semibold">Renata</div>
+                      <div class="text-xs text-slate-500">CEO of PT XYZ</div>
+                    </div>
+                    <div class="ml-auto flex text-amber-400">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                  <p class="mt-4 text-slate-700">“Working with Tritech has taken our business to the next level. The mobile app they developed greatly helped us improve customer interaction.”</p>
+                </div>
+              </div>
+              <div class="basis-full shrink-0 px-4">
+                <div class="rounded-xl bg-sky-50 border border-slate-200 p-6 sm:p-8 shadow-soft">
+                  <div class="flex items-center gap-3">
+                    <img src="https://i.pravatar.cc/64?img=32" alt="Arif" class="h-10 w-10 rounded-full" />
+                    <div>
+                      <div class="font-semibold">Arif</div>
+                      <div class="text-xs text-slate-500">Product Director</div>
+                    </div>
+                    <div class="ml-auto flex text-amber-400">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                  <p class="mt-4 text-slate-700">“Their agile approach and attention to detail helped us ship our cloud migration on time and on budget.”</p>
+                </div>
+              </div>
+              <div class="basis-full shrink-0 px-4">
+                <div class="rounded-xl bg-sky-50 border border-slate-200 p-6 sm:p-8 shadow-soft">
+                  <div class="flex items-center gap-3">
+                    <img src="https://i.pravatar.cc/64?img=5" alt="Maya" class="h-10 w-10 rounded-full" />
+                    <div>
+                      <div class="font-semibold">Maya</div>
+                      <div class="text-xs text-slate-500">Operations Lead</div>
+                    </div>
+                    <div class="ml-auto flex text-amber-400">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                  <p class="mt-4 text-slate-700">“The dashboards simplified our reporting and gave the team real‑time visibility into KPIs.”</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex items-center justify-center gap-2" data-testimonial-dots>
+            <button class="h-1.5 w-8 rounded-full bg-brand-600/70" aria-label="Slide 1"></button>
+            <button class="h-1.5 w-8 rounded-full bg-slate-300" aria-label="Slide 2"></button>
+            <button class="h-1.5 w-8 rounded-full bg-slate-300" aria-label="Slide 3"></button>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    
+    <!-- Book Consultation Section -->
+    <section id="bookconsultation" class="py-12">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-dark mb-4">Ready to Enhance Your Operational Excellence?</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Schedule a free consultation with our experts to discuss your management and financial challenges and explore tailored solutions.</p>
+        </div>
+
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-xl shadow-soft p-6 md:p-8">
+                <h3 class="text-2xl font-semibold text-dark mb-6">Book Your Consultation</h3>
+                
+                <form class="space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="John">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Doe">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                        <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="john.doe@company.com">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
+                        <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Your Company Inc.">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">What services are you interested in?</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <option>Select a service</option>
+                            <option>IT Infrastructure Consulting</option>
+                            <option>Cloud Solutions & Migration</option>
+                            <option>Cybersecurity Assessment</option>
+                            <option>Software Development</option>
+                            <option>Digital Transformation</option>
+                            <option>Data Analytics & BI</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Date & Time</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <input type="date" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <input type="time" class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Message (Optional)</label>
+                        <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Tell us about your project or challenges..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-brand-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-brand-700 transition-colors">
+                        Schedule Consultation
+                    </button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Core Competencies -->
+    <section id="core-competencies" class="py-16 bg-slate-50">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-800">Core Competencies</h2>
+            <p class="mt-4 text-lg text-slate-600">Through our unique features, operational modalities, and client-centered service approach, we possess the following core competencies in our professional industry.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+            <!-- Competencies List -->
+            <div class="bg-white rounded-xl p-8 shadow-soft">
+                <h3 class="text-xl font-semibold text-slate-800 mb-6">Our Strengths Include:</h3>
+                <ul class="space-y-4">
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-slate-700">Qualified staff and management</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-slate-700">Outstanding output exhibited on our prior assignments/projects</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-slate-700">Impactful service provided witnessed by our clients</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-slate-700">Good prior preparation and client base</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-slate-700">Hands on experience with local and international companies</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-slate-700">International affiliation with renowned companies</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-slate-700">Learning opportunity from others who are in the business</span>
+                </li>
+                </ul>
+            </div>
+            
+            <!-- Call to Action -->
+            <div class="bg-brand-50 rounded-xl p-8 shadow-soft flex flex-col justify-center">
+                <div class="text-center">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">Learn About Our Services</h3>
+                <p class="text-slate-600 mb-6">Discover how our core competencies can benefit your organization and help you achieve your goals.</p>
+                <a href="#services" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 transition-colors">
+                    Explore Services
+                    <svg class="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div>
+            <div class="flex items-center gap-2 text-sm font-medium text-brand-700">
+              <span class="h-2 w-2 rounded-full bg-brand-600"></span>
+              <span>Contact</span>
+            </div>
+            <h2 class="mt-3 text-3xl font-bold">Get in Touch with Us</h2>
+            <div class="mt-8 space-y-6 text-slate-700">
+              <div class="flex items-start gap-4">
+                <div class="h-10 w-10 flex items-center justify-center rounded-lg bg-slate-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-brand-700"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+                </div>
+                <div>
+                  <div class="font-semibold">Email</div>
+                  <div class="text-slate-600">admin@tritech.com</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="h-10 w-10 flex items-center justify-center rounded-lg bg-slate-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-brand-700"><path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3 7.18 2 2 0 0 1 5 5h4.09a2 2 0 0 1 2 1.72l.57 3.43a2 2 0 0 1-.55 1.86l-1.27 1.27a16 16 0 0 0 6.37 6.37l1.27-1.27a2 2 0 0 1 1.86-.55l3.43.57A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <div class="font-semibold">Phone</div>
+                  <div class="text-slate-600">+62 857‑4132‑4352</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="h-10 w-10 flex items-center justify-center rounded-lg bg-slate-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-brand-700"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <div class="font-semibold">Our Location</div>
+                  <div class="text-slate-600">Malang, East Java, Indonesia</div>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="h-10 w-10 flex items-center justify-center rounded-lg bg-slate-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5 text-brand-700"><path d="M3 4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v16l-5-3-5 3-5-3-3 1V4z"/></svg>
+                </div>
+                <div>
+                  <div class="font-semibold">Office Hours</div>
+                  <div class="text-slate-600">Monday – Friday, 8 AM – 4 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form class="rounded-xl border border-slate-200 p-6 sm:p-8 bg-white shadow-soft grid gap-4" onsubmit="event.preventDefault(); alert('Message sent!');">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="text-sm text-slate-600">First Name</label>
+                <input type="text" required class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-500" placeholder="John" />
+              </div>
+              <div>
+                <label class="text-sm text-slate-600">Last Name</label>
+                <input type="text" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-500" placeholder="Doe" />
+              </div>
+            </div>
+            <div>
+              <label class="text-sm text-slate-600">Email</label>
+              <input type="email" required class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-500" placeholder="johndoe@gmail.com" />
+            </div>
+            <div>
+              <label class="text-sm text-slate-600">Subject</label>
+              <select class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-500">
+                <option>Select Subject</option>
+                <option>Project Consultation</option>
+                <option>Support & Maintenance</option>
+                <option>Career & Partnership</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-sm text-slate-600">Message</label>
+              <textarea rows="5" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 outline-none focus:ring-2 focus:ring-brand-500" placeholder="Write your message"></textarea>
+            </div>
+            <button type="submit" class="mt-2 inline-flex items-center gap-2 rounded-full bg-brand-600 px-5 py-3 text-white font-semibold hover:bg-brand-700 justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M2.25 12l19.5-9-5.25 18-6-6-8.25-3z"/></svg>
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-16 border-t border-slate-100">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-10 md:grid-cols-12 text-center md:text-left">
+        <div class="md:col-span-5 flex flex-col items-center md:items-start">
+        <a href="#" class="flex items-center gap-3">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded bg-brand-600 text-white font-semibold">T</span>
+        <span class="text-xl font-semibold">EGA</span>
+        </a>
+        <p class="mt-4 text-slate-600">Empowering businesses with innovative software solutions.<br/>Your trusted partner in technology.</p>
+        <div class="mt-6 flex items-center gap-3 justify-center md:justify-start">
+        <a href="#" class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 text-white hover:bg-brand-700" aria-label="X">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><path d="M3 3l18 18M21 3L3 21"/></svg>
+        </a>
+        <a href="#" class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 text-white hover:bg-brand-700" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+        </a>
+        <a href="#" class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 text-white hover:bg-brand-700" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.18-3.37-1.18-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.61.07-.61 1 .07 1.52 1.05 1.52 1.05.89 1.52 2.34 1.08 2.91.83.09-.64.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.57 9.57 0 0 1 5 0c1.9-1.3 2.74-1.02 2.74-1.02.56 1.38.21 2.4.11 2.65.64.7 1.03 1.6 1.03 2.68 0 3.85-2.34 4.69-4.57 4.94.36.31.68.92.68 1.86v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z" clip-rule="evenodd"/></svg>
+        </a>
+        <a href="#" class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 text-white hover:bg-brand-700" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zM8.5 8.5h3.8v2.1h.05c.53-1 1.83-2.1 3.77-2.1 4.03 0 4.77 2.65 4.77 6.1V24h-4v-7.1c0-1.7-.03-3.9-2.38-3.9-2.4 0-2.77 1.86-2.77 3.78V24h-4V8.5z"/></svg>
+        </a>
+        </div>
+        </div>
+        <div class="md:col-span-7 grid sm:grid-cols-3 gap-8 text-center md:text-left">
+        <div>
+        <h4 class="text-xs font-semibold tracking-wider text-slate-500">MENU</h4>
+        <ul class="mt-4 space-y-3 text-sm">
+        <li><a href="#" class="hover:text-brand-600">Home</a></li>
+        <li><a href="#about" class="hover:text-brand-600">About Us</a></li>
+        <li><a href="#ourapproach" class="hover:text-brand-600">Our Approach</a></li>
+        <li><a href="#bookconsultation" class="hover:text-brand-600">Book Consultation</a></li>
+        <li><a href="#contact" class="hover:text-brand-600">Contact Us</a></li>
+        </ul>
+        </div>
+        <div>
+        <h4 class="text-xs font-semibold tracking-wider text-slate-500">OUR SERVICES</h4>
+        <ul class="mt-4 space-y-3 text-sm">
+        <li><a href="#services" class="hover:text-brand-600">Custom Software</a></li>
+        <li><a href="#services" class="hover:text-brand-600">Mobile Apps</a></li>
+        <li><a href="#services" class="hover:text-brand-600">Enterprise</a></li>
+        <li><a href="#services" class="hover:text-brand-600">UI/UX Design</a></li>
+        <li><a href="#services" class="hover:text-brand-600">IT Consulting</a></li>
+        </ul>
+        </div>
+        <div>
+        <h4 class="text-xs font-semibold tracking-wider text-slate-500">OTHER</h4>
+        <ul class="mt-4 space-y-3 text-sm">
+        <li><a href="#members" class="hover:text-brand-600">Key Members</a></li>
+        <li><a href="#core-competencies" class="hover:text-brand-600">Core Competencies</a></li>
+        </ul>
+        </div>
+        </div>
+        </div>
+        <div class="mt-10 text-center text-sm text-slate-500">© <span id="year"></span> Designed and developed by <a href="#" class="text-brand-700 hover:underline">Tritech</a></div>
+        </div>
+        </footer>
+
+    <script>
+      // Mobile nav toggle
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (mobileBtn) {
+        mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+      }
+
+      // Simple accordion (services + FAQ)
+      document.querySelectorAll('[data-accordion-button]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const panel = btn.parentElement.querySelector('[data-accordion-panel]');
+          const icon = btn.querySelector('svg');
+          if (panel) {
+            panel.classList.toggle('hidden');
+          }
+          if (icon) {
+            icon.classList.toggle('rotate-180');
+          }
+        });
+      });
+
+      // Testimonial slider
+      const track = document.querySelector('[data-testimonial-track]');
+      const prev = document.querySelector('[data-testimonial-prev]');
+      const next = document.querySelector('[data-testimonial-next]');
+      const dots = Array.from(document.querySelectorAll('[data-testimonial-dots] > button'));
+      let index = 0;
+
+      function updateSlider(newIndex) {
+        index = (newIndex + dots.length) % dots.length;
+        if (track) {
+          track.style.transform = `translateX(-${index * 100}%)`;
+        }
+        dots.forEach((d, i) => {
+          d.className = 'h-1.5 w-8 rounded-full ' + (i === index ? 'bg-brand-600/70' : 'bg-slate-300');
+        });
+      }
+
+      if (prev && next) {
+        prev.addEventListener('click', () => updateSlider(index - 1));
+        next.addEventListener('click', () => updateSlider(index + 1));
+      }
+      dots.forEach((d, i) => d.addEventListener('click', () => updateSlider(i)));
+
+      // Animated counters in About stats
+      const counterEls = document.querySelectorAll('.stat-count');
+      if (counterEls.length) {
+        const animate = (el) => {
+          const target = parseInt(el.getAttribute('data-target') || '0', 10);
+          const durationMs = 1200;
+          const start = performance.now();
+          const startVal = 0;
+          const step = (now) => {
+            const progress = Math.min((now - start) / durationMs, 1);
+            const val = Math.floor(startVal + progress * target);
+            el.textContent = String(val);
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        };
+
+        const io = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              animate(el);
+              obs.unobserve(el);
+            }
+          });
+        }, { threshold: 0.5 });
+
+        counterEls.forEach((el) => io.observe(el));
+      }
+
+      const aboutContent = document.getElementById('aboutContent');
+      const aboutToggle = document.getElementById('aboutToggle');
+      if (aboutContent && aboutToggle) {
+        const toggleText = aboutToggle.querySelector('span');
+        const toggleIcon = aboutToggle.querySelector('i');
+        aboutToggle.setAttribute('aria-expanded', 'false');
+        aboutToggle.addEventListener('click', function() {
+          const willExpand = !aboutContent.classList.contains('expanded');
+          aboutContent.classList.toggle('expanded', willExpand);
+          if (willExpand) {
+            if (toggleText) toggleText.textContent = 'Read less';
+            if (toggleIcon) toggleIcon.className = 'fas fa-chevron-up text-xs';
+            aboutToggle.setAttribute('aria-expanded', 'true');
+          } else {
+            if (toggleText) toggleText.textContent = 'Read more';
+            if (toggleIcon) toggleIcon.className = 'fas fa-chevron-down text-xs';
+            aboutToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceHeaders = document.querySelectorAll('.service-header');
+            
+            serviceHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    content.classList.toggle('active');
+                    
+                    // Update the helper text
+                    const helperText = header.querySelector('.text-sm');
+                    if (content.classList.contains('active')) {
+                        helperText.textContent = 'Click to collapse';
+                    } else {
+                        helperText.textContent = 'Click to expand';
+                    }
+                });
+            });
+        });
+
+        // Read more functionality
+        const readMoreButtons = document.querySelectorAll('.read-more-btn');
+        
+        readMoreButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const memberId = this.getAttribute('data-member');
+                const moreContent = this.previousElementSibling.querySelector('.more-content');
+                const initialText = this.previousElementSibling.querySelector('.member-description');
+                
+                if (moreContent.classList.contains('hidden')) {
+                    moreContent.classList.remove('hidden');
+                    initialText.classList.add('hidden');
+                    this.textContent = 'Read less';
+                } else {
+                    moreContent.classList.add('hidden');
+                    initialText.classList.remove('hidden');
+                    this.textContent = 'Read more';
+                }
+            });
+        });
+
+      // Footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
